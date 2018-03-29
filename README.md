@@ -6,9 +6,14 @@ Type val = __builtin_ct_choose(bool condition, Type valTrue, Type valFalse);
 ```
 
 This function returns `valTrue` if `condition` is true, else `valFalse`, and does so in constant time.
-The X86_64 backend will compile this function into a `CMOV` after other optimizations have run. For other backends, there is a default 
-implementation as `return (trueVal & ~condition) | (falseVal & condition)` with condition={0,1}.
-Unlike the x86_64, this transformation happens at the end of the IR passes, and just before the backend passes.
+The X86_64 backend will compile this function into a `CMOV` after other optimizations have run: this should ensure that 
+the transformation is *not* altered. 
+
+For other backends, there is a default 
+implementation as `return (trueVal & ~condition) | (falseVal & condition)` with `condition={0,1}`.
+Unlike the x86_64, this transformation happens after other IR passes have run, but before the backend passes have: this means IR 
+passes will not alter the transformation, but there is a risk the backend optimizations will.
+
 For more information, refer to the paper "What you get is what you C: Controlling side effects in mainstream C compilers" 
 available at [TODO].
  
@@ -16,7 +21,7 @@ The setup below was tested on Ubuntu trust 14.04.5 LTS x86_64. I suggest you ins
 
 Pre-requesites:
 ---------------
-	1. Install a VM running Ubuntu trust 14.04.5 LTS x86_64. Allocate 32GB of disk.
+	1. Install a VM running Ubuntu trusty 14.04.5 LTS x86_64. Allocate 32GB of disk.
 	2. $sudo apt-get install git cmake g++ binutils-dev
 
 Download, compile and install Clang/LLVM:
