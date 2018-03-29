@@ -17,7 +17,7 @@ passes will not alter the transformation, but there is a risk the backend optimi
 For more information, refer to the paper "What you get is what you C: Controlling side effects in mainstream C compilers" 
 available at [TODO].
  
-The setup below was tested on Ubuntu trust 14.04.5 LTS x86_64. I suggest you install this as a VM before reading further.
+The setup below was tested on Ubuntu trusty 14.04.5 LTS x86_64. I suggest you install this as a VM before reading further.
 
 Pre-requesites:
 ---------------
