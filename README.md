@@ -36,4 +36,4 @@ Download, compile and install Clang/LLVM:
 	$cmake --build .
 	$sudo make install
 
-Now Clang has the new function `__builtin_ct_choose` which you call. If you're on x86_64, it should be compiled into a `CMOV`.
+Now Clang has the new built-in function `__builtin_ct_choose()` which you can call. If you're on x86_64, it should be compiled into a `CMOV`.
